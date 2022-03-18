@@ -1,4 +1,10 @@
-FROM centos
-RUN apt install httpd -y
-COPY index.html /var/www/html/index.html
-CMD httpd -DFOREGROUND
+FROM ubuntu:18.04
+
+RUN apt-get update && \
+    apt-get install -y redis-server && \
+    apt-get clean
+
+EXPOSE 6379
+
+CMD ["redis-server", "--protected-mode no"]
+
